@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'email' => $user['email']
             ];
             $_SESSION['success'] = "Connexion réussie. Bienvenue " . $user['pseudo'] . " !";
-            header("Location: ../index.php");
+            header("Location: ../vue/index.php");
             exit;
         } else {
             $_SESSION['error'] = "Identifiants incorrects.";
@@ -46,6 +46,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 } else {
-    header("Location: ../vue/login.php");
     exit;
 }

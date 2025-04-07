@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$pseudo, $email, $hashedPassword, $postalCode]);
 
         $_SESSION['success'] = "Inscription réussie. Connecte-toi maintenant.";
-        header("Location: ../login.php");
+        header("Location: ../vue/login.php");
         exit;
     } catch (PDOException $e) {
         $_SESSION['error'] = "Erreur lors de l'inscription : " . $e->getMessage();

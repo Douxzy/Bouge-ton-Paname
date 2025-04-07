@@ -13,20 +13,46 @@
     <header>
         <nav class="bg-white shadow-lg px-6 py-4">
             <div class="container mx-auto flex items-center justify-between">
-                <a href="<?php __dir__ ; ?>index.php" class="text-2xl font-bold text-gray-800">Bouge ton Paname</a>
+                <a href="<?php __dir__; ?>index.php" class="text-2xl font-bold text-gray-800">Bouge ton Paname</a>
 
                 <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
-                    <li><a href="<?php __dir__ ; ?>index.php" class="hover:text-blue-600 transition">Accueil</a></li>
+                    <li><a href="<?php __dir__; ?>index.php" class="hover:text-blue-600 transition">Accueil</a></li>
                     <li><a href="#" class="hover:text-blue-600 transition">À propos</a></li>
                     <li><a href="#" class="hover:text-blue-600 transition">Contact</a></li>
                 </ul>
+                <div class="hidden md:flex items-center space-x-4">
+                    <?php
+                    // Exemple : initialisation de session (à faire en haut de ta page)
+                    if (session_status() === PHP_SESSION_NONE) {
+                        session_start();
+                    }
 
-                <div class="hidden md:flex space-x-4">
-                    <a href="<?php __dir__ ; ?>login.php" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition">Connexion</a>
-                    <a href="<?php __dir__ ; ?>register.php" class="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-xl hover:bg-blue-50 transition">Inscription</a>
+                    // Optionnel : si $user est récupéré et qu'on veut le mettre en session
+                    if (isset($user) && is_array($user) && isset($user['pseudo'])) {
+                        $_SESSION['user'] = [
+                            'pseudo' => $user['pseudo']
+                        ];
+                    }
+                    ?>
+
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <p class="text-sm text-gray-700">
+                            Bienvenue <span class="font-semibold text-blue-600"><?php echo htmlspecialchars($_SESSION['user']['pseudo']); ?></span> !
+                        </p>
+                        <form action="<?php __dir__; ?>../controller/logout.php" method="post">
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700 transition">
+                                Déconnexion
+                            </button>
+                        </form>
+                    <?php else: ?>
+                        <a href="login.php" class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition">
+                            Connexion
+                        </a>
+                        <a href="register.php" class="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded-xl hover:bg-blue-50 transition">
+                            Inscription
+                        </a>
+                    <?php endif; ?>
                 </div>
-
-
                 <div class="md:hidden">
                     <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
@@ -38,7 +64,7 @@
             </div>
 
             <div id="mobile-menu" class="hidden md:hidden px-4 pt-4 pb-2 space-y-2">
-                <a href="<?php __dir__ ; ?> index.php" class="block text-gray-700 hover:text-blue-600">Accueil</a>
+                <a href="<?php __dir__; ?> index.php" class="block text-gray-700 hover:text-blue-600">Accueil</a>
                 <a href="#" class="block text-gray-700 hover:text-blue-600">À propos</a>
                 <a href="#" class="block text-gray-700 hover:text-blue-600">Contact</a>
                 <div class="pt-2">
