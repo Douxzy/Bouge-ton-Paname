@@ -12,3 +12,13 @@ CREATE TABLE IF NOT EXISTS users (
     postal_code VARCHAR(10) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE commentaires (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    record_id VARCHAR(255) NOT NULL, -- ID de l'événement depuis l'API
+    pseudo VARCHAR(100) NOT NULL,
+    commentaire TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE commentaires ADD COLUMN user_id INT NOT NULL AFTER id;
