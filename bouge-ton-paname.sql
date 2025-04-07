@@ -22,3 +22,14 @@ CREATE TABLE commentaires (
 );
 
 ALTER TABLE commentaires ADD COLUMN user_id INT NOT NULL AFTER id;
+ALTER TABLE evenements ADD record_id VARCHAR(255) UNIQUE;
+
+
+CREATE TABLE evenements (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titre VARCHAR(255),
+    description TEXT,
+    date_debut DATETIME,
+    date_fin DATETIME,
+    adresse VARCHAR(255)
+);

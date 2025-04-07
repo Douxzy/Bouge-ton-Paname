@@ -18,7 +18,7 @@
                 <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
                     <li><a href="<?php __dir__; ?>index.php" class="hover:text-blue-600 transition">Accueil</a></li>
                     <li><a href="#" class="hover:text-blue-600 transition">À propos</a></li>
-                    <li><a href="#" class="hover:text-blue-600 transition">Contact</a></li>
+                    <li><a href="<?php __dir__; ?> contact.php" class="hover:text-blue-600 transition">Contact</a></li>
                 </ul>
                 <div class="hidden md:flex items-center space-x-4">
                     <?php
@@ -66,7 +66,7 @@
             <div id="mobile-menu" class="hidden md:hidden px-4 pt-4 pb-2 space-y-2">
                 <a href="<?php __dir__; ?> index.php" class="block text-gray-700 hover:text-blue-600">Accueil</a>
                 <a href="#" class="block text-gray-700 hover:text-blue-600">À propos</a>
-                <a href="#" class="block text-gray-700 hover:text-blue-600">Contact</a>
+                <a href="<?php __dir__; ?> contact.php" class="block text-gray-700 hover:text-blue-600">Contact</a>
                 <div class="pt-2">
                     <a href="#" class="block w-full text-center text-white bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700">Connexion</a>
                     <a href="#" class="block w-full text-center text-blue-600 border border-blue-600 px-4 py-2 mt-2 rounded-xl hover:bg-blue-50">Inscription</a>
