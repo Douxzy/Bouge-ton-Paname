@@ -6,7 +6,7 @@ require __dir__ . "/header/header.php";
     <div class="bg-white w-full max-w-2xl p-10 rounded-2xl shadow-2xl">
       <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Créer un compte</h1>
 
-      <form class="space-y-6">
+      <form action="../controller/register.php" method="POST">
         <!-- Pseudo -->
         <div>
           <label for="pseudo" class="block text-sm font-medium text-gray-700">Pseudo</label>
