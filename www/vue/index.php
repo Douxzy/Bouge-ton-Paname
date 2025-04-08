@@ -139,23 +139,24 @@ if ($response !== false) {
       $comments = $stmt->fetchAll();
       ?>
       <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-  <div class="swiper swiper-<?= $recordId ?>">
+        <div class="swiper swiper-<?= $recordId ?>">
           <div class="swiper-wrapper">
             <?php if (!empty($e['cover_url'])): ?>
               <div class="swiper-slide">
                 <img src="<?= $e['cover_url'] ?>" class="w-full h-48 object-cover" alt="Image événement">
               </div>
             <?php endif; ?>
-      
+
             <?php foreach ($comments as $com): ?>
               <?php if (!empty($com['image_path'])): ?>
                 <div class="swiper-slide">
-                  <img src="<?= '../' . htmlspecialchars($com['image_path']) ?>" class="w-full h-48 object-cover" alt="Image commentaire">
+                  <img src="<?= '../' . htmlspecialchars($com['image_path']) ?>" class="w-full h-48 object-cover"
+                    alt="Image commentaire">
                 </div>
               <?php endif; ?>
             <?php endforeach; ?>
           </div>
-      
+
           <!-- Pagination & navigation -->
           <div class="swiper-pagination"></div>
           <div class="swiper-button-prev"></div>

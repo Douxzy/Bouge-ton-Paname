@@ -21,7 +21,8 @@
         <div>
             <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
             <ul class="text-sm space-y-2">
-                <li>Email : <a href="mailto:contact@bougetonpaname.fr" class="hover:text-white">contact@bougetonpaname.fr</a></li>
+                <li>Email : <a href="mailto:contact@bougetonpaname.fr"
+                        class="hover:text-white">contact@bougetonpaname.fr</a></li>
                 <li>Tél : <a href="tel:+33123456789" class="hover:text-white">01 23 45 67 89</a></li>
                 <li>Adresse : Paris, France</li>
             </ul>
@@ -33,22 +34,22 @@
     </div>
 </footer>
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll('.swiper').forEach((el) => {
-      new Swiper(el, {
-        loop: true,
-        slidesPerView: 1,
-        pagination: {
-          el: el.querySelector('.swiper-pagination'),
-          clickable: true,
-        },
-        navigation: {
-          nextEl: el.querySelector('.swiper-button-next'),
-          prevEl: el.querySelector('.swiper-button-prev'),
-        },
-      });
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.swiper').forEach((el) => {
+            new Swiper(el, {
+                loop: true,
+                slidesPerView: 1,
+                pagination: {
+                    el: el.querySelector('.swiper-pagination'),
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: el.querySelector('.swiper-button-next'),
+                    prevEl: el.querySelector('.swiper-button-prev'),
+                },
+            });
+        });
     });
-  });
 </script>
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
