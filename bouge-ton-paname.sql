@@ -23,13 +23,16 @@ CREATE TABLE commentaires (
 
 ALTER TABLE commentaires ADD COLUMN user_id INT NOT NULL AFTER id;
 ALTER TABLE evenements ADD record_id VARCHAR(255) UNIQUE;
+ALTER TABLE users ADD COLUMN role ENUM('user', 'admin') DEFAULT 'user';
 
 
-CREATE TABLE evenements (
+CREATE TABLE IF NOT EXISTS evenements (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    record_id VARCHAR(255) UNIQUE,
     titre VARCHAR(255),
     description TEXT,
     date_debut DATETIME,
     date_fin DATETIME,
     adresse VARCHAR(255)
 );
+
