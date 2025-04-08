@@ -4,16 +4,32 @@ session_start();
 require "../controller/db.php";
 require "header/header.php";
 
-
-// Formulaire commentaire
+// Formulaire commentaire avec image
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['record_id'], $_POST['commentaire']) && isset($_SESSION['user'])) {
   $recordId = $_POST['record_id'];
   $userId = $_SESSION['user']['id'];
   $pseudo = $_SESSION['user']['pseudo'];
   $commentaire = htmlspecialchars($_POST['commentaire']);
+  $imagePath = null;
 
-  $stmt = $pdo->prepare("INSERT INTO commentaires (record_id, user_id, pseudo, commentaire) VALUES (?, ?, ?, ?)");
-  $stmt->execute([$recordId, $userId, $pseudo, $commentaire]);
+  // Gestion de l'image si elle est uploadée
+  if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    $uploadDir = '../uploads/';
+    if (!is_dir($uploadDir)) {
+      mkdir($uploadDir, 0777, true);
+    }
+
+    $tmpName = $_FILES['image']['tmp_name'];
+    $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
+    $destination = $uploadDir . $fileName;
+
+    if (move_uploaded_file($tmpName, $destination)) {
+      $imagePath = 'uploads/' . $fileName;
+    }
+  }
+
+  $stmt = $pdo->prepare("INSERT INTO commentaires (record_id, user_id, pseudo, commentaire, image_path) VALUES (?, ?, ?, ?, ?)");
+  $stmt->execute([$recordId, $userId, $pseudo, $commentaire, $imagePath]);
 
   header("Location: " . $_SERVER['REQUEST_URI']);
   exit;
@@ -35,6 +51,7 @@ if ($response !== false) {
   $results = $data['records'] ?? [];
 }
 ?>
+
 
 <div class="relative w-full h-100 bg-cover bg-center">
   <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm"></div>
@@ -122,9 +139,29 @@ if ($response !== false) {
       $comments = $stmt->fetchAll();
       ?>
       <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-        <?php if (!empty($e['cover_url'])): ?>
-          <img src="<?= $e['cover_url'] ?>" alt="<?= htmlspecialchars($e['title']) ?>" class="w-full h-48 object-cover">
-        <?php endif; ?>
+  <div class="swiper swiper-<?= $recordId ?>">
+          <div class="swiper-wrapper">
+            <?php if (!empty($e['cover_url'])): ?>
+              <div class="swiper-slide">
+                <img src="<?= $e['cover_url'] ?>" class="w-full h-48 object-cover" alt="Image événement">
+              </div>
+            <?php endif; ?>
+      
+            <?php foreach ($comments as $com): ?>
+              <?php if (!empty($com['image_path'])): ?>
+                <div class="swiper-slide">
+                  <img src="<?= '../' . htmlspecialchars($com['image_path']) ?>" class="w-full h-48 object-cover" alt="Image commentaire">
+                </div>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </div>
+      
+          <!-- Pagination & navigation -->
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+
         <div class="p-4">
           <h3 class="text-lg font-semibold mb-2"><?= htmlspecialchars($e['title'] ?? 'Sans titre') ?></h3>
           <p class="text-sm text-gray-600 mb-2"><?= htmlspecialchars($e['lead_text'] ?? 'Pas de description.') ?></p>
@@ -156,13 +193,15 @@ if ($response !== false) {
 
             <!-- Formulaire -->
             <?php if (isset($_SESSION['user'])): ?>
-              <form method="POST" class="mt-4 space-y-2">
+              <form method="POST" enctype="multipart/form-data" class="mt-4 space-y-2">
                 <input type="hidden" name="record_id" value="<?= $recordId ?>">
                 <textarea name="commentaire" placeholder="Votre commentaire" required
                   class="w-full border rounded px-2 py-1"></textarea>
+                <input type="file" name="image" accept="image/*" class="text-sm">
                 <button type="submit"
                   class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">Envoyer</button>
               </form>
+
             <?php else: ?>
               <p class="text-sm text-gray-500 mt-4">Vous devez <a href="/vue/login.php" class="text-blue-600 underline">vous
                   connecter</a> pour commenter.</p>

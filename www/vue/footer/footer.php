@@ -32,7 +32,26 @@
         © 2025 Bouge ton Paname. Tous droits réservés.
     </div>
 </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.swiper').forEach((el) => {
+      new Swiper(el, {
+        loop: true,
+        slidesPerView: 1,
+        pagination: {
+          el: el.querySelector('.swiper-pagination'),
+          clickable: true,
+        },
+        navigation: {
+          nextEl: el.querySelector('.swiper-button-next'),
+          prevEl: el.querySelector('.swiper-button-prev'),
+        },
+      });
+    });
+  });
+</script>
 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </body>
 
 </html>
