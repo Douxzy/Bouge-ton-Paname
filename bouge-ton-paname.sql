@@ -35,4 +35,11 @@ CREATE TABLE IF NOT EXISTS evenements (
     date_fin DATETIME,
     adresse VARCHAR(255)
 );
+CREATE TABLE messages_contact (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    nom VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 

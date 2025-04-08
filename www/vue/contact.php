@@ -31,6 +31,11 @@ require __DIR__ . "/header/header.php";
                 <button type="submit"
                     class="w-full bg-blue-600 text-white py-2 px-4 rounded-xl font-semibold hover:bg-blue-700 transition">Envoyer</button>
             </div>
+            <?php if (isset($_GET['success'])): ?>
+                <div class="text-green-600 text-center mb-4 font-medium">
+                    Merci pour votre message ! Nous vous répondrons rapidement.
+                </div>
+            <?php endif; ?>
         </form>
     </div>
 </div>
