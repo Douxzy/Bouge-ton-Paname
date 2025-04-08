@@ -1,218 +1,184 @@
 <?php
-session_start();
-
+require __DIR__ . "/header/header.php";
 require "../controller/db.php";
-require "header/header.php";
+require "../controller/functions.php";
 
-// Formulaire commentaire avec image
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['record_id'], $_POST['commentaire']) && isset($_SESSION['user'])) {
-  $recordId = $_POST['record_id'];
-  $userId = $_SESSION['user']['id'];
-  $pseudo = $_SESSION['user']['pseudo'];
-  $commentaire = htmlspecialchars($_POST['commentaire']);
-  $imagePath = null;
 
-  // Gestion de l'image si elle est uploadée
-  if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-    $uploadDir = '../uploads/';
-    if (!is_dir($uploadDir)) {
-      mkdir($uploadDir, 0777, true);
-    }
 
-    $tmpName = $_FILES['image']['tmp_name'];
-    $fileName = uniqid() . '_' . basename($_FILES['image']['name']);
-    $destination = $uploadDir . $fileName;
+// Filtres
+$query = $_GET['q'] ?? '';
+$prix = $_GET['prix'] ?? '';
+$accessibilite = $_GET['accessibilite'] ?? '';
+$quartier = $_GET['quartier'] ?? '';
 
-    if (move_uploaded_file($tmpName, $destination)) {
-      $imagePath = 'uploads/' . $fileName;
-    }
-  }
+// Pagination
+$limit = 20;
+$page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+$offset = ($page - 1) * $limit;
 
-  $stmt = $pdo->prepare("INSERT INTO commentaires (record_id, user_id, pseudo, commentaire, image_path) VALUES (?, ?, ?, ?, ?)");
-  $stmt->execute([$recordId, $userId, $pseudo, $commentaire, $imagePath]);
+// Requête SQL principale
+$sql = "SELECT * FROM evenements WHERE 1=1";
+$params = [];
 
-  header("Location: " . $_SERVER['REQUEST_URI']);
-  exit;
-}
-
-$query = $_GET['q'] ?? null;
-$results = [];
-
-$encodedQuery = urlencode($query ?? '');
-$apiUrl = "https://opendata.paris.fr/api/v2/catalog/datasets/que-faire-a-paris-/records?limit=12";
-
+// Filtres dynamiques
 if (!empty($query)) {
-  $apiUrl .= "&search={$encodedQuery}";
+  $sql .= " AND (titre LIKE :q OR description LIKE :q)";
+  $params[':q'] = '%' . $query . '%';
+}
+if (!empty($prix)) {
+  $sql .= " AND prix = :prix";
+  $params[':prix'] = $prix;
+}
+if (!empty($accessibilite)) {
+  $sql .= " AND accessibilite = :accessibilite";
+  $params[':accessibilite'] = $accessibilite;
+}
+if (!empty($quartier)) {
+  $sql .= " AND quartier = :quartier";
+  $params[':quartier'] = $quartier;
 }
 
-$response = @file_get_contents($apiUrl);
-if ($response !== false) {
-  $data = json_decode($response, true);
-  $results = $data['records'] ?? [];
+// Compter le total d'événements
+$count_sql = "SELECT COUNT(*) FROM evenements WHERE 1=1";
+$count_stmt = $pdo->prepare(str_replace("SELECT *", "SELECT COUNT(*)", $sql));
+$count_stmt->execute($params);
+$total_events = $count_stmt->fetchColumn();
+$total_pages = ceil($total_events / $limit);
+
+// Ajouter LIMIT & OFFSET
+$sql .= " ORDER BY date_debut DESC LIMIT :limit OFFSET :offset";
+
+$stmt = $pdo->prepare($sql);
+foreach ($params as $key => $value) {
+  $stmt->bindValue($key, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
 }
+$stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+$stmt->execute();
+$events = $stmt->fetchAll();
 ?>
 
-
+<!-- FILTRES -->
 <div class="relative w-full h-100 bg-cover bg-center">
   <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm"></div>
-  <div class="relative z-10 flex items-center justify-center h-full">
-    <div class="relative w-full max-w-4xl px-4">
-      <form action="" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <!-- Champ de recherche -->
+  <div class="relative z-10 flex items-center justify-center h-full py-10">
+    <div class="relative w-full max-w-4xl">
+      <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <!-- Recherche texte -->
         <div class="relative col-span-1 md:col-span-2">
-          <input type="text" name="q" placeholder="Rechercher une sortie à Paris..."
-            class="w-full pl-14 pr-4 py-5 text-lg rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all duration-300 bg-white bg-opacity-90 text-gray-800" />
-          <i class="fas fa-search absolute left-5 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
+          <input type="text" name="q" value="<?= htmlspecialchars($query) ?>"
+            placeholder="Rechercher une sortie à Paris..."
+            class="w-full pl-12 pr-4 py-3 text-base rounded-xl shadow focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-800" />
+          <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg"></i>
         </div>
 
-        <!-- Filtre catégorie -->
-        <div>
-          <select name="categorie"
-            class="w-full py-5 px-4 text-lg rounded-2xl shadow-lg bg-white bg-opacity-90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
-            <option value="">Toutes les catégories</option>
-            <option value="concert">Concert</option>
-            <option value="expo">Exposition</option>
-            <option value="theatre">Théâtre</option>
-            <option value="sport">Sport</option>
-          </select>
-        </div>
-        <!-- Filtre prix -->
-        <div>
-          <select name="prix"
-            class="w-full py-5 px-4 text-lg rounded-2xl shadow-lg bg-white bg-opacity-90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
-            <option value="">Tous les prix</option>
-            <option value="gratuit">Gratuit</option>
-            <option value="payant">Payant</option>
-          </select>
-        </div>
+        <!-- Prix -->
+        <select name="prix" class="w-full py-3 px-4 rounded-xl bg-white shadow text-gray-800">
+          <option value="">Prix</option>
+          <option value="Gratuit" <?= $prix === 'Gratuit' ? 'selected' : '' ?>>Gratuit</option>
+          <option value="Payant" <?= $prix === 'Payant' ? 'selected' : '' ?>>Payant</option>
+        </select>
 
-        <!-- Filtre accessibilité -->
-        <div>
-          <select name="accessibilite"
-            class="w-full py-5 px-4 text-lg rounded-2xl shadow-lg bg-white bg-opacity-90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
-            <option value="">Accessibilité</option>
-            <option value="oui">Accessible PMR</option>
-            <option value="non">Non accessible</option>
-          </select>
-        </div>
+        <!-- Accessibilité -->
+        <select name="accessibilite" class="w-full py-3 px-4 rounded-xl bg-white shadow text-gray-800">
+          <option value="">Accessibilité</option>
+          <option value="oui" <?= $accessibilite === 'oui' ? 'selected' : '' ?>>Accessible PMR</option>
+        </select>
 
-        <!-- Filtre quartier -->
-        <div>
-          <select name="quartier"
-            class="w-full py-5 px-4 text-lg rounded-2xl shadow-lg bg-white bg-opacity-90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
-            <option value="">Tous les quartiers</option>
-            <option value="1er">1er arrondissement</option>
-            <option value="2e">2e arrondissement</option>
-            <!-- Ajoute tous les arrondissements ici -->
-          </select>
-        </div>
+        <!-- Quartier -->
+        <select name="quartier" class="w-full py-3 px-4 rounded-xl bg-white shadow text-gray-800">
+          <option value="">Quartier</option>
+          <option value="paris-centre" <?= $quartier === 'paris-centre' ? 'selected' : '' ?>>Paris Centre</option>
+          <option value="paris-18e-arrondissement" <?= $quartier === 'paris-18e-arrondissement' ? 'selected' : '' ?>>Paris
+            18e</option>
+          <option value="paris-20e-arrondissement" <?= $quartier === 'paris-20e-arrondissement' ? 'selected' : '' ?>>Paris
+            20e</option>
+        </select>
 
-
-        <!-- Filtre date -->
-        <div>
-          <input type="date" name="date"
-            class="w-full py-5 px-4 text-lg rounded-2xl shadow-lg bg-white bg-opacity-90 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300" />
+        <!-- Bouton -->
+        <div class="md:col-span-4 text-center">
+          <button type="submit" class="mt-2 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition">
+            Filtrer
+          </button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
+<!-- AFFICHAGE EVENEMENTS -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+  <?php foreach ($events as $event): ?>
+    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+      <?php if (!empty($event['cover_url'])): ?>
+        <img src="<?= htmlspecialchars($event['cover_url']) ?>" alt="<?= htmlspecialchars($event['titre']) ?>"
+          class="w-full h-48 object-cover">
+      <?php endif; ?>
 
-<?php if (!empty($query)): ?>
-  <h2 class="text-2xl font-bold text-center mb-6">Résultats pour : "<?= htmlspecialchars($query) ?>"</h2>
-<?php else: ?>
-  <h2 class="text-2xl font-bold text-center mb-6">Toutes les sorties à Paris</h2>
-<?php endif; ?>
+      <div class="px-6 py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-2"><?= htmlspecialchars($event['titre']) ?></h2>
+        <p class="text-gray-600 mb-3"><?= htmlspecialchars(mb_strimwidth($event['description'], 0, 150, '...')) ?></p>
+        <div class="text-sm text-gray-500">
+          <p><span class="font-medium">Début :</span> <?= htmlspecialchars($event['date_debut']) ?></p>
+          <p><span class="font-medium">Fin :</span> <?= htmlspecialchars($event['date_fin']) ?></p>
+          <p><span class="font-medium">Adresse :</span> <?= htmlspecialchars($event['adresse']) ?></p>
+          <a href="<?= $event['url'] ?>" class="text-blue-500 hover:underline ml-2">En savoir plus</a>
+        </div>
 
-<?php if (empty($results)): ?>
-  <p class="text-center text-gray-600">Aucun résultat trouvé.</p>
-<?php else: ?>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
-    <?php foreach ($results as $event):
-      $e = $event['record']['fields'];
-      $recordId = $event['record']['id'] ?? null;
+        <?php
+        $comments = getCommentsByEvent($pdo, $event['record_id']);
+        if ($comments):
+          ?>
+          <h3 class="text-lg font-semibold text-gray-700 mt-5 mb-3">Commentaires :</h3>
+          <ul class="space-y-3">
+            <?php foreach ($comments as $comment): ?>
+              <li class="bg-gray-50 p-3 rounded-lg shadow-sm">
+                <strong class="text-gray-800"><?= htmlspecialchars($comment['pseudo']) ?> :</strong>
+                <span class="text-gray-700"><?= htmlspecialchars($comment['commentaire']) ?></span>
+                <em class="block text-xs text-gray-400 mt-1"><?= htmlspecialchars($comment['created_at']) ?></em>
 
-      // Récupération des commentaires pour cet event
-      $stmt = $pdo->prepare("SELECT * FROM commentaires WHERE record_id = ? ORDER BY created_at DESC");
-      $stmt->execute([$recordId]);
-      $comments = $stmt->fetchAll();
-      ?>
-      <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
-        <div class="swiper swiper-<?= $recordId ?>">
-          <div class="swiper-wrapper">
-            <?php if (!empty($e['cover_url'])): ?>
-              <div class="swiper-slide">
-                <img src="<?= $e['cover_url'] ?>" class="w-full h-48 object-cover" alt="Image événement">
-              </div>
-            <?php endif; ?>
-
-            <?php foreach ($comments as $com): ?>
-              <?php if (!empty($com['image_path'])): ?>
-                <div class="swiper-slide">
-                  <img src="<?= '../' . htmlspecialchars($com['image_path']) ?>" class="w-full h-48 object-cover"
-                    alt="Image commentaire">
-                </div>
-              <?php endif; ?>
+                <?php if (!empty($comment['image_path'])): ?>
+                  <img src="<?= '../' . htmlspecialchars($comment['image_path']) ?>" alt="Image du commentaire"
+                    class="mt-2 max-h-48 w-auto object-cover rounded border">
+                <?php endif; ?>
+              </li>
             <?php endforeach; ?>
-          </div>
+          </ul>
 
-          <!-- Pagination & navigation -->
-          <div class="swiper-pagination"></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
-
-        <div class="p-4">
-          <h3 class="text-lg font-semibold mb-2"><?= htmlspecialchars($e['title'] ?? 'Sans titre') ?></h3>
-          <p class="text-sm text-gray-600 mb-2"><?= htmlspecialchars($e['lead_text'] ?? 'Pas de description.') ?></p>
-          <?php if (!empty($e['address_street'])): ?>
-            <p class="text-xs text-gray-500">📍 <?= htmlspecialchars($e['address_street']) ?></p>
-          <?php endif; ?>
-          <?php if (!empty($e['date_description'])): ?>
-            <p class="text-xs text-gray-500">📅 <?= htmlspecialchars($e['date_description']) ?></p>
-          <?php endif; ?>
-          <?php if (!empty($e['url'])): ?>
-            <a href="<?= htmlspecialchars($e['url']) ?>" target="_blank"
-              class="inline-block mt-2 text-blue-600 hover:underline text-sm">Voir plus d'infos</a>
-          <?php endif; ?>
-
-          <!-- Commentaires -->
-          <div class="mt-4 border-t pt-4">
-            <h4 class="font-semibold mb-2">Commentaires :</h4>
-
-            <?php if (empty($comments)): ?>
-              <p class="text-sm text-gray-500">Aucun commentaire encore.</p>
-            <?php else: ?>
-              <?php foreach ($comments as $com): ?>
-                <div class="mb-2">
-                  <p class="text-sm text-gray-800 font-semibold"><?= htmlspecialchars($com['pseudo']) ?> :</p>
-                  <p class="text-sm text-gray-600"><?= htmlspecialchars($com['commentaire']) ?></p>
-                </div>
-              <?php endforeach; ?>
-            <?php endif; ?>
-
-            <!-- Formulaire -->
-            <?php if (isset($_SESSION['user'])): ?>
-              <form method="POST" enctype="multipart/form-data" class="mt-4 space-y-2">
-                <input type="hidden" name="record_id" value="<?= $recordId ?>">
-                <textarea name="commentaire" placeholder="Votre commentaire" required
-                  class="w-full border rounded px-2 py-1"></textarea>
-                <input type="file" name="image" accept="image/*" class="text-sm">
-                <button type="submit"
-                  class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">Envoyer</button>
-              </form>
-
-            <?php else: ?>
-              <p class="text-sm text-gray-500 mt-4">Vous devez <a href="/vue/login.php" class="text-blue-600 underline">vous
-                  connecter</a> pour commenter.</p>
-            <?php endif; ?>
-
-          </div>
-        </div>
+        <?php else: ?>
+          <p class="text-sm text-gray-500 italic mt-4">Aucun commentaire pour le moment.</p>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['user'])): ?>
+          <form method="POST" action="../controller/commentaire.php" enctype="multipart/form-data">
+            <input type="hidden" name="record_id" value="<?= htmlspecialchars($event['record_id']) ?>">
+            <textarea name="commentaire" rows="3" required placeholder="Laisse ton commentaire..."
+              class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            <div class="flex items-center justify-between">
+              <input type="file" name="image" accept="image/*" class="text-sm">
+              <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Envoyer</button>
+            </div>
+          </form>
+        <?php else: ?>
+          <p class="text-sm text-gray-400 mt-3 italic">Connecte-toi pour laisser un commentaire.</p>
+        <?php endif; ?>
       </div>
-    <?php endforeach; ?>
+    </div>
+  <?php endforeach; ?>
+</div>
+
+
+
+<!-- PAGINATION -->
+<?php if ($total_pages > 1): ?>
+  <div class="mt-8 flex justify-center space-x-2">
+    <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+      <a href="?<?= http_build_query(array_merge($_GET, ['page' => $i])) ?>"
+        class="px-4 py-2 rounded-lg <?= $i == $page ? 'bg-blue-600 text-white' : 'bg-white text-gray-800 border' ?>">
+        <?= $i ?>
+      </a>
+    <?php endfor; ?>
   </div>
 <?php endif; ?>
 
-<?php require "footer/footer.php"; ?>
+<?php require __DIR__ . "/footer/footer.php"; ?>

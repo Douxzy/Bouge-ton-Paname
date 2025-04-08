@@ -43,3 +43,9 @@ CREATE TABLE messages_contact (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE evenements
+  ADD quartier VARCHAR(100),
+  ADD prix VARCHAR(100),
+  ADD accessibilite VARCHAR(10),
+  ADD cover_url VARCHAR(255),
+  ADD url VARCHAR(100);

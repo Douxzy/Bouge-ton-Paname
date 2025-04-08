@@ -12,7 +12,8 @@
             <h3 class="text-lg font-semibold text-white mb-4">Liens utiles</h3>
             <ul class="space-y-2 text-sm">
                 <li><a href="<?php __DIR__; ?>index.php" class="hover:text-white transition">Accueil</a></li>
-                <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-white transition">Mentions Legales</a></li>
+                <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-white transition">Mentions
+                        Legales</a></li>
                 <li><a href="#" class="hover:text-white transition">À propos</a></li>
                 <li><a href="<?php __DIR__; ?> contact.php" class="hover:text-white transition">Contact</a></li>
             </ul>
@@ -33,26 +34,6 @@
         © 2025 Bouge ton Paname. Tous droits réservés.
     </div>
 </footer>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll('.swiper').forEach((el) => {
-            new Swiper(el, {
-                loop: true,
-                slidesPerView: 1,
-                pagination: {
-                    el: el.querySelector('.swiper-pagination'),
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: el.querySelector('.swiper-button-next'),
-                    prevEl: el.querySelector('.swiper-button-prev'),
-                },
-            });
-        });
-    });
-</script>
-
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 </body>
 
 </html>
