@@ -24,14 +24,15 @@ $stmt = $pdo->query("SELECT commentaires.commentaire, commentaires.record_id, co
                      ORDER BY commentaires.created_at DESC");
 $commentaires = $stmt->fetchAll();
 ?>
-<h1 class="text-3xl font-bold mb-6 text-gray-800 tracking-tight">Modération des commentaires</h1>
 
 <a href="dashboard.php" class="inline-flex items-center gap-2 text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
     <i class="fas fa-arrow-left"></i>
     Retour au dashboard
 </a>
+<h1 class="text-3xl font-bold mb-6 text-gray-800 tracking-tight">Modération des commentaires</h1>
 
-
+<div class="flex min-h-screen">
+    <?php require __DIR__ . "/navbar.php"; ?>
 <div class="overflow-x-auto">
     <table class="min-w-full bg-white rounded-2xl shadow ring-1 ring-gray-200 overflow-hidden text-sm">
         <thead class="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
@@ -65,6 +66,7 @@ $commentaires = $stmt->fetchAll();
             <?php endif; ?>
         </tbody>
     </table>
+</div>
 </div>
 
 <?php
