@@ -18,7 +18,7 @@ if (isset($_GET['delete'])) {
 }
 
 // Récupération des commentaires
-$stmt = $pdo->query("SELECT commentaires.commentaire, commentaires.record_id, commentaires.created_at, utilisateurs.pseudo 
+$stmt = $pdo->query("SELECT commentaires.commentaire, commentaires.id,  commentaires.record_id, commentaires.created_at, utilisateurs.pseudo 
                      FROM commentaires 
                      JOIN users AS utilisateurs ON commentaires.user_id = utilisateurs.id 
                      ORDER BY commentaires.created_at DESC");
@@ -48,9 +48,9 @@ $commentaires = $stmt->fetchAll();
             <?php foreach ($commentaires as $comment): ?>
                 <tr class="border-t hover:bg-gray-50 transition">
                     <td class="p-4 font-medium"><?= $comment['id'] ?></td>
-                    <td class="p-4"><?= htmlspecialchars($comment['email']) ?></td>
-                    <td class="p-4"><?= htmlspecialchars($comment['event_id']) ?></td>
-                    <td class="p-4"><?= htmlspecialchars($comment['content']) ?></td>
+                    <td class="p-4"><?= htmlspecialchars($comment['pseudo']) ?></td>
+                    <td class="p-4"><?= htmlspecialchars($comment['commentaire']) ?></td>
+                    
                     <td class="p-4">
                         <a href="?delete=<?= $comment['id'] ?>" onclick="return confirm('Supprimer ce commentaire ?')"
                             class="text-red-600 hover:underline flex items-center gap-1">

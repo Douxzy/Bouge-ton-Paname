@@ -48,14 +48,6 @@ $users = $pdo->query("SELECT id, email, role, created_at FROM users ORDER BY cre
     <?php require __DIR__ . "/navbar.php"; ?>
 
     <main class="flex-1 p-10">
-        <h1 class="text-3xl font-bold mb-6 text-gray-800 tracking-tight">Liste des utilisateurs</h1>
-
-        <a href="dashboard.php"
-            class="inline-flex items-center gap-2 text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition mb-6">
-            <i class="fas fa-arrow-left"></i>
-            Retour au dashboard
-        </a>
-
         <div class="bg-white p-6 rounded-2xl shadow ring-1 ring-gray-200">
             <div class="overflow-x-auto">
                 <table class="min-w-full text-sm text-left border-collapse">
