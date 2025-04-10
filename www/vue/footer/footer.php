@@ -12,9 +12,7 @@
             <h3 class="text-lg font-semibold text-white mb-4">Liens utiles</h3>
             <ul class="space-y-2 text-sm">
                 <li><a href="<?php __DIR__; ?>index.php" class="hover:text-white transition">Accueil</a></li>
-                <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-white transition">Mentions
-                        Legales</a></li>
-                <li><a href="#" class="hover:text-white transition">À propos</a></li>
+                <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-white transition">Mentions Legales</a></li>
                 <li><a href="<?php __DIR__; ?> contact.php" class="hover:text-white transition">Contact</a></li>
             </ul>
         </div>

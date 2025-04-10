@@ -19,7 +19,6 @@
                 <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
                     <li><a href="<?php __DIR__; ?>index.php" class="hover:text-blue-600 transition">Accueil</a></li>
                     <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-blue-600 transition">Mentions Legales</a></li>
-                    <li><a href="#" class="hover:text-blue-600 transition">À propos</a></li>
                     <li><a href="<?php __DIR__; ?> contact.php" class="hover:text-blue-600 transition">Contact</a></li>
                 </ul>
                 <div class="hidden md:flex items-center space-x-4">
