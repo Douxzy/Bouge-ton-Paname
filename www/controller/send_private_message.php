@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../db.php';
+require_once 'db.php';
 
 if (!empty($_POST['message']) && isset($_POST['receiver_id']) && isset($_SESSION['user_id'])) {
     $message = trim($_POST['message']);
