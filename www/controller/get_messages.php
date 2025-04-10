@@ -2,9 +2,18 @@
 session_start();
 require_once 'db.php';
 
+if (!isset($_SESSION['user_id'])) {
+    exit("Utilisateur non connecté.");
+}
+
+if (!isset($_GET['user_id'])) {
+    exit("Aucun destinataire spécifié.");
+}
+
 $sender_id = $_SESSION['user_id'];
 $receiver_id = $_GET['user_id'];
 
+// Préparation de la requête
 $stmt = $pdo->prepare("
     SELECT * FROM private_messages 
     WHERE (sender_id = ? AND receiver_id = ?) 
@@ -21,4 +30,5 @@ while ($row = $stmt->fetch()) {
             </span>
           </div>";
 }
+
 ?>
