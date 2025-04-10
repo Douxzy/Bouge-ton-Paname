@@ -181,4 +181,7 @@ $events = $stmt->fetchAll();
   </div>
 <?php endif; ?>
 
-<?php require __DIR__ . "/footer/footer.php"; ?>
+<?php 
+require __DIR__ . "/footer/footer.php";
+require __DIR__ . "/chat.php";
+?>

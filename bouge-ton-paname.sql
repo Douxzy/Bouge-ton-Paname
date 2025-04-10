@@ -23,6 +23,7 @@ CREATE TABLE commentaires (
 
 ALTER TABLE commentaires ADD COLUMN user_id INT NOT NULL AFTER id;
 ALTER TABLE evenements ADD record_id VARCHAR(255) UNIQUE;
+ALTER TABLE commentaires ADD image_path VARCHAR(100) UNIQUE;
 ALTER TABLE users ADD COLUMN role ENUM('user', 'admin') DEFAULT 'user';
 
 
@@ -49,3 +50,11 @@ ALTER TABLE evenements
   ADD accessibilite VARCHAR(10),
   ADD cover_url VARCHAR(255),
   ADD url VARCHAR(100);
+
+CREATE TABLE private_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
