@@ -60,8 +60,8 @@ $events = $stmt->fetchAll();
 
 <!-- FILTRES -->
 <div class="relative w-full h-100 bg-cover bg-center">
-  <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm"></div>
-  <div class="relative z-10 flex items-center justify-center h-full py-10">
+  <div class="absolute inset-0 bg-opacity-40 backdrop-blur-sm"></div>
+  <div class="relative z-10 flex items-center justify-center h-full py-10 bg-cover bg-center" style="background-image: url('../assets/image/bar-recheche-image.jpg');">
     <div class="relative w-full max-w-4xl">
       <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <!-- Recherche texte -->
@@ -88,11 +88,10 @@ $events = $stmt->fetchAll();
         <!-- Quartier -->
         <select name="quartier" class="w-full py-3 px-4 rounded-xl bg-white shadow text-gray-800">
           <option value="">Quartier</option>
-          <option value="paris-centre" <?= $quartier === 'paris-centre' ? 'selected' : '' ?>>Paris Centre</option>
-          <option value="paris-18e-arrondissement" <?= $quartier === 'paris-18e-arrondissement' ? 'selected' : '' ?>>Paris
-            18e</option>
-          <option value="paris-20e-arrondissement" <?= $quartier === 'paris-20e-arrondissement' ? 'selected' : '' ?>>Paris
-            20e</option>
+          <option value="paris-1e-arrondissement" <?= $quartier === 'paris-1e-arrondissement' ? 'selected' : '' ?>>Paris
+            1er</option>
+          <option value="paris-2e-arrondissement" <?= $quartier === 'paris-2e-arrondissement' ? 'selected' : '' ?>>Paris
+            2eme</option>
         </select>
 
         <!-- Bouton -->
@@ -128,7 +127,7 @@ $events = $stmt->fetchAll();
         <?php
         $comments = getCommentsByEvent($pdo, $event['record_id']);
         if ($comments):
-          ?>
+        ?>
           <h3 class="text-lg font-semibold text-gray-700 mt-5 mb-3">Commentaires :</h3>
           <ul class="space-y-3">
             <?php foreach ($comments as $comment): ?>
@@ -179,10 +178,10 @@ $events = $stmt->fetchAll();
       </a>
     <?php endfor; ?>
   </div>
-  <br/>
+  <br />
 <?php endif; ?>
 
-<?php 
+<?php
 require __DIR__ . "/footer/footer.php";
 require __DIR__ . "/chat.php";
 ?>
