@@ -6,7 +6,7 @@ Bouge ton Paname est une plateforme web dédiée aux sorties à Paris. Elle perm
 
 ## 🎯 Frontend
 
-🔍 Recherche : par mots-clés, catégorie, date, accessibilité, prix, et quartier.
+🔍 Recherche : par mots-clés, accessibilité, prix, et quartier.
 
 🗓️ Affichage des événements : en cartes stylisées avec pagination.
 
