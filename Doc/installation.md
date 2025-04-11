@@ -12,7 +12,7 @@ Créez une base de données en important le fichier SQL situé dans Doc/bouge-to
 
 ## Étape 3 :
 
-Modifiez le fichier db.php avec les informations de connexion à votre base de données.
+Modifiez le fichier db.php avec les informations de connexion à votre base de données comme dit dans la doc db.
 
 ## Étape 4 :
 
