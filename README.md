@@ -10,7 +10,7 @@ Bouge ton Paname est une plateforme web dédiée aux sorties à Paris. Elle perm
 
 🗓️ Affichage des événements : en cartes stylisées avec pagination.
 
-🖼️ Commentaires avec images : les utilisateurs connectés peuvent laisser des commentaires illustrés via un carrousel (SwiperJS).
+🖼️ Commentaires avec images : les utilisateurs connectés peuvent laisser des commentaires avec images.
 
 🔐 Authentification : inscription, connexion sécurisée, gestion de session.
 
