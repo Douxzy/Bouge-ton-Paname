@@ -120,7 +120,7 @@ $events = $stmt->fetchAll();
         <div class="text-sm text-gray-500">
           <p><span class="font-medium">Début :</span> <?= htmlspecialchars($event['date_debut']) ?></p>
           <p><span class="font-medium">Fin :</span> <?= htmlspecialchars($event['date_fin']) ?></p>
-          <p><span class="font-medium">Adresse :</span> <?= htmlspecialchars($event['adresse']) ?></p>
+          <p><span class="font-medium">Adresse :</span> <?= htmlspecialchars($event['adresse']) ?> <?= htmlspecialchars($event['quartier']) ?></p>
           <a href="<?= $event['url'] ?>" class="text-blue-500 hover:underline ml-2">En savoir plus</a>
         </div>
 
@@ -183,5 +183,4 @@ $events = $stmt->fetchAll();
 
 <?php
 require __DIR__ . "/footer/footer.php";
-require __DIR__ . "/chat.php";
 ?>

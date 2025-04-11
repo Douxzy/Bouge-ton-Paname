@@ -1,33 +1,34 @@
+-- Base de Donner de Bouge ton Paname
 
-
-
-
-
-
-CREATE TABLE IF NOT EXISTS users (
+--------------------------------------------------
+-- Table des User
+--------------------------------------------------
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     pseudo VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     postal_code VARCHAR(10) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    role ENUM('user', 'admin') DEFAULT 'user'
 );
-
+--------------------------------------------------
+-- Table des Commentaires
+--------------------------------------------------
 CREATE TABLE commentaires (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    record_id VARCHAR(255) NOT NULL, -- ID de l'événement depuis l'API
+    user_id INT NOT NULL,
+    record_id VARCHAR(255) NOT NULL,
     pseudo VARCHAR(100) NOT NULL,
     commentaire TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    image_path VARCHAR(100) UNIQUE
 );
-
-ALTER TABLE commentaires ADD COLUMN user_id INT NOT NULL AFTER id;
-ALTER TABLE evenements ADD record_id VARCHAR(255) UNIQUE;
-ALTER TABLE commentaires ADD image_path VARCHAR(100) UNIQUE;
-ALTER TABLE users ADD COLUMN role ENUM('user', 'admin') DEFAULT 'user';
-
-
-CREATE TABLE IF NOT EXISTS evenements (
+--------------------------------------------------
+-- Table des Évenements
+--------------------------------------------------
+CREATE TABLE evenements (
     id INT AUTO_INCREMENT PRIMARY KEY,
     record_id VARCHAR(255) UNIQUE,
     titre VARCHAR(255),
@@ -35,26 +36,19 @@ CREATE TABLE IF NOT EXISTS evenements (
     date_debut DATETIME,
     date_fin DATETIME,
     adresse VARCHAR(255)
+    quartier VARCHAR(100),
+    prix VARCHAR(100),
+    accessibilite VARCHAR(10),
+    cover_url VARCHAR(255),
+    url VARCHAR(100)
 );
+--------------------------------------------------
+-- Table des Messages de la page Contact
+--------------------------------------------------
 CREATE TABLE messages_contact (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     nom VARCHAR(100) NOT NULL,
     message TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
-ALTER TABLE evenements
-  ADD quartier VARCHAR(100),
-  ADD prix VARCHAR(100),
-  ADD accessibilite VARCHAR(10),
-  ADD cover_url VARCHAR(255),
-  ADD url VARCHAR(100);
-
-CREATE TABLE private_messages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    sender_id INT NOT NULL,
-    receiver_id INT NOT NULL,
-    message TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
