@@ -179,6 +179,7 @@ $events = $stmt->fetchAll();
       </a>
     <?php endfor; ?>
   </div>
+  <br/>
 <?php endif; ?>
 
 <?php 
