@@ -14,6 +14,8 @@
                 <li><a href="<?php __DIR__; ?>index.php" class="hover:text-white transition">Accueil</a></li>
                 <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-white transition">Mentions Legales</a></li>
                 <li><a href="<?php __DIR__; ?> contact.php" class="hover:text-white transition">Contact</a></li>
+                <li><a href="<?php __DIR__; ?>aide.php" class="hover:text-white transition">Aide</a></li>
+                <br/>
                 <li><a href="../admin/login.php" class="hover:text-white transition">Admin</a></li>
             </ul>
         </div>

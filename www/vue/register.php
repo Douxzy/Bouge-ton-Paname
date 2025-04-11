@@ -41,7 +41,7 @@ require __dir__ . "/header/header.php";
           <input type="text" id="postal-code" name="postal-code" required maxlength="5"
             class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
-
+        <br/>
         <!-- Bouton -->
         <div>
           <button type="submit"

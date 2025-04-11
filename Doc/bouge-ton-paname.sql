@@ -35,7 +35,7 @@ CREATE TABLE evenements (
     description TEXT,
     date_debut DATETIME,
     date_fin DATETIME,
-    adresse VARCHAR(255)
+    adresse VARCHAR(255),
     quartier VARCHAR(100),
     prix VARCHAR(100),
     accessibilite VARCHAR(10),
