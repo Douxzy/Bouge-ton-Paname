@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bouge ton Paname</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="icon" href="../../assets/image/Bouge-ton-Paname-icon.png" />
+    <link rel="icon" href="../assets/image/Bouge-ton-Paname-icon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
@@ -15,7 +15,7 @@
     <header>
         <nav class="bg-white shadow-lg px-6 py-4">
             <div class="container mx-auto flex items-center justify-between">
-                <a href="<?php __DIR__; ?>index.php" class="text-2xl font-bold text-gray-800">Bouge ton Paname</a>
+            <a href="<?php __DIR__; ?>index.php" class="text-2xl font-bold text-gray-800">Bouge ton Paname</a>
 
                 <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
                     <li><a href="<?php __DIR__; ?>index.php" class="hover:text-blue-600 transition">Accueil</a></li>
