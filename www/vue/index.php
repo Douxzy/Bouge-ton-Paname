@@ -3,8 +3,6 @@ require __DIR__ . "/header/header.php";
 require "../controller/db.php";
 require "../controller/functions.php";
 
-
-
 // Filtres
 $query = $_GET['q'] ?? '';
 $prix = $_GET['prix'] ?? '';

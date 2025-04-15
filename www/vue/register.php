@@ -27,6 +27,14 @@ require __dir__ . "/header/header.php";
           <input type="password" id="password" name="password" required
             class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
+        
+        <!-- Barre de difficulté du mot de passe -->
+        <div class="mt-2">
+          <div class="w-full h-2 bg-gray-200 rounded-xl">
+            <div id="password-strength-bar" class="h-2 rounded-xl transition-all duration-300 ease-in-out"></div>
+          </div>
+          <p id="password-strength-text" class="text-sm mt-1 font-medium text-gray-700"></p>
+        </div>
 
         <!-- Confirmer mot de passe -->
         <div>
@@ -34,6 +42,7 @@ require __dir__ . "/header/header.php";
           <input type="password" id="confirm-password" name="confirm-password" required
             class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
+
 
         <!-- Code postal -->
         <div>
