@@ -25,5 +25,12 @@
             <i class="fas fa-calendar-plus text-purple-500 text-xl mr-3"></i>
             <span class="text-gray-800 font-medium">Gérer les publications</span>
         </a>
+
+        <!-- FAQ personnalisées -->
+        <a href="faq.php" class="flex items-center p-4 rounded-xl hover:bg-purple-100 transition">
+            <i class="fas fa-question-circle text-purple-500 text-xl mr-3"></i>
+            <span class="text-gray-800 font-medium">Gérer les questions et réponses de la FAQ</span>
+        </a>
+
     </nav>
 </div>

@@ -52,3 +52,11 @@ CREATE TABLE messages_contact (
     message TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+--------------------------------------------------
+-- Table de la FAQ question reponse
+--------------------------------------------------
+CREATE TABLE faq (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question TEXT NOT NULL,
+    reponse TEXT NOT NULL
+);
