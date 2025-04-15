@@ -20,7 +20,7 @@
                 <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
                     <li><a href="<?php __DIR__; ?>index.php" class="hover:text-blue-600 transition">Accueil</a></li>
                     <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-blue-600 transition">Mentions Legales</a></li>
-                    <li><a href="<?php __DIR__; ?> contact.php" class="hover:text-blue-600 transition">Contact</a></li>
+                    <li><a href="<?php __DIR__; ?>contact.php" class="hover:text-blue-600 transition">Contact</a></li>
                     <li><a href="<?php __DIR__; ?>aide.php" class="hover:text-blue-600 transition">Aide</a></li>
                 </ul>
                 <div class="hidden md:flex items-center space-x-4">
@@ -74,7 +74,7 @@
             <div id="mobile-menu" class="hidden md:hidden px-4 pt-4 pb-2 space-y-2">
                 <a href="<?php __DIR__; ?> index.php" class="block text-gray-700 hover:text-blue-600">Accueil</a>
                 <a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-blue-600 transition">Mentions Legales</a>
-                <a href="<?php __DIR__; ?> contact.php" class="block text-gray-700 hover:text-blue-600">Contact</a>
+                <a href="<?php __DIR__; ?>contact.php" class="block text-gray-700 hover:text-blue-600">Contact</a>
                 <a href="<?php __DIR__; ?>aide.php" class="hover:text-blue-600 transition">Aide</a>
                 <div class="pt-2">
                     <a href="#"

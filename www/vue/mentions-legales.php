@@ -21,7 +21,7 @@ require __DIR__ . "/header/header.php";
         <section class="mb-10">
             <h2 class="text-2xl font-semibold text-gray-700 mb-2">Hébergement</h2>
             <p>
-                Hébergeur : o2switch<br>
+                Hébergeur : Always Data<br>
                 Adresse : 222-224 Boulevard Gustave Flaubert, 63000 Clermont-Ferrand<br>
                 Téléphone : 04 44 44 60 40
             </p>
