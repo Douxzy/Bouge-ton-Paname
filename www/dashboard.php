@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . "/../vue/header/header.php";
+require __DIR__ . "/header.php";
 
-require_once '../controller/db.php';
+require __DIR__ . '/controller/db.php';
 
 // Regrouper les inscriptions par jour
 $stmt = $pdo->query("
@@ -18,10 +18,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $labels[] = $row['jour'];
     $data[] = $row['total'];
 }
-
-
-
-
 
 // Redirection si l'utilisateur n'est pas admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -48,9 +44,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 </div>
 
 <?php
-require __DIR__ . "/../vue/footer/footer.php";
+require __DIR__ . "/footer.php";
 ?>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const ctx = document.getElementById('userGrowthChart').getContext('2d');
     const userGrowthChart = new Chart(ctx, {

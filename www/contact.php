@@ -4,7 +4,7 @@ require __DIR__ . "/header.php";
 <div class="w-full h-screen flex items-center justify-center px-4">
     <div class="bg-white w-full max-w-md p-10 rounded-2xl shadow-2xl">
         <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Contact</h1>
-        <form action="../controller/contact.php" method="POST" class="space-y-6">
+        <form action="controller/contact.php" method="POST" class="space-y-6">
             <!-- Email -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Adresse email</label>

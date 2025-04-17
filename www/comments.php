@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . "/../vue/header/header.php";
-require_once '../controller/db.php';
+require __DIR__ . "/header.php";
+require __DIR__ . '/controller/db.php';
 
 // Vérification admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -70,6 +70,6 @@ $commentaires = $stmt->fetchAll();
 </div>
 
 <?php
-require __DIR__ . "/../vue/footer/footer.php";
+require __DIR__ . "/footer.php";
 
 ?>
