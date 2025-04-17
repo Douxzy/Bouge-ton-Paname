@@ -1,12 +1,12 @@
 <?php
-require __dir__ . "/header/header.php";
+require __dir__ . "/header.php";
 
 ?>
   <div class="w-full h-screen flex items-center justify-center px-4">
     <div class="bg-white w-full max-w-2xl p-10 rounded-2xl shadow-2xl">
       <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Créer un compte</h1>
 
-      <form action="../controller/register.php" method="POST">
+      <form action="controller/register.php" method="POST">
         <!-- Pseudo -->
         <div>
           <label for="pseudo" class="block text-sm font-medium text-gray-700">Pseudo</label>
@@ -65,6 +65,6 @@ require __dir__ . "/header/header.php";
     </div>
   </div>
 <?php
-require __dir__ . "/footer/footer.php";
+require __dir__ . "/footer.php";
 
 ?>

@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . "/header/header.php";
-require "../controller/db.php";
-require "../controller/functions.php";
+require __DIR__ . "/header.php";
+require __DIR__ . "/controller/db.php";
+require __DIR__ . "/controller/functions.php";
 
 // Filtres
 $query = $_GET['q'] ?? '';
@@ -59,7 +59,7 @@ $events = $stmt->fetchAll();
 <!-- FILTRES -->
 <div class="relative w-full h-100 bg-cover bg-center">
   <div class="absolute inset-0 bg-opacity-40 backdrop-blur-sm"></div>
-  <div class="relative z-10 flex items-center justify-center h-full py-10 bg-cover bg-center" style="background-image: url('../assets/image/bar-recheche-image.jpg');">
+  <div class="relative z-10 flex items-center justify-center h-full py-10 bg-cover bg-center" style="background-image: url('assets/image/bar-recheche-image.jpg');">
     <div class="relative w-full max-w-4xl">
       <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <!-- Recherche texte -->
@@ -146,7 +146,7 @@ $events = $stmt->fetchAll();
           <p class="text-sm text-gray-500 italic mt-4">Aucun commentaire pour le moment.</p>
         <?php endif; ?>
         <?php if (isset($_SESSION['user'])): ?>
-          <form method="POST" action="../controller/commentaire.php" enctype="multipart/form-data">
+          <form method="POST" action="controller/commentaire.php" enctype="multipart/form-data">
             <input type="hidden" name="record_id" value="<?= htmlspecialchars($event['record_id']) ?>">
             <textarea name="commentaire" rows="3" required placeholder="Laisse ton commentaire..."
               class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
@@ -180,5 +180,5 @@ $events = $stmt->fetchAll();
 <?php endif; ?>
 
 <?php
-require __DIR__ . "/footer/footer.php";
+require __DIR__ . "/footer.php";
 ?>

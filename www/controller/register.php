@@ -13,28 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validation basique
     if (empty($pseudo) || empty($email) || empty($password) || empty($confirmPassword) || empty($postalCode)) {
         $_SESSION['error'] = "Tous les champs sont obligatoires.";
-        header("Location: ../vue/register.php");
+        header("Location: ../register.php");
 
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['error'] = "Adresse email invalide.";
-        header("Location: ../vue/register.php");
+        header("Location: ../register.php");
 
         exit;
     }
 
     if ($password !== $confirmPassword) {
         $_SESSION['error'] = "Les mots de passe ne correspondent pas.";
-        header("Location: ../vue/register.php");
+        header("Location: ../register.php");
 
         exit;
     }
 
     if (!preg_match('/^\d{5}$/', $postalCode)) {
         $_SESSION['error'] = "Le code postal doit contenir 5 chiffres.";
-        header("Location: ../vue/register.php");
+        header("Location: ../register.php");
 
         exit;
     }
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $checkStmt->execute([$email]);
         if ($checkStmt->rowCount() > 0) {
             $_SESSION['error'] = "Un compte existe déjà avec cet email.";
-            header("Location: ../vue/register.php");
+            header("Location: ../register.php");
 
             exit;
         }
@@ -62,12 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     } catch (PDOException $e) {
         $_SESSION['error'] = "Erreur lors de l'inscription : " . $e->getMessage();
-        header("Location: ../vue/register.php");
+        header("Location: ../register.php");
 
         exit;
     }
 } else {
-    header("Location: ../vue/register.php");
+    header("Location: ../register.php");
 
     exit;
 }

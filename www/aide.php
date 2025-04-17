@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . "/header/header.php";
-require "../controller/db.php";
-require "../controller/functions.php";
+require __DIR__ . "/header.php";
+require __DIR__ . "/controller/db.php";
+require __DIR__ . "/controller/functions.php";
 
 // Récupération des questions/réponses depuis la BDD
 $stmt = $pdo->query("SELECT * FROM faq ORDER BY id ASC");
@@ -37,5 +37,5 @@ $faqs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </script>
 
 <?php
-require __DIR__ . "/footer/footer.php";
+require __DIR__ . "/footer.php";
 ?>

@@ -1,5 +1,5 @@
 <?php
-require __dir__ . "/header/header.php";
+require __dir__ . "/header.php";
 
 
 $error = $_SESSION['error'] ?? null;
@@ -23,7 +23,7 @@ unset($_SESSION['error'], $_SESSION['success']);
             </div>
         <?php endif; ?>
 
-        <form action="../controller/login.php" method="POST" class="space-y-6">
+        <form action="controller/login.php" method="POST" class="space-y-6">
             <!-- Email -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Adresse email</label>
@@ -53,6 +53,6 @@ unset($_SESSION['error'], $_SESSION['success']);
     </div>
 </div>
 <?php
-require __dir__ . "/footer/footer.php";
+require __dir__ . "/footer.php";
 
 ?>

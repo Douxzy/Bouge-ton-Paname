@@ -1,6 +1,6 @@
 <?php
 if (!isset($pdo)) {
-    require_once __DIR__ . "/../../controller/db.php";
+    require_once __DIR__ . "/controller/db.php";
 }
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -31,14 +31,13 @@ if (isset($_SESSION['user']['id'])) {
     <header>
         <nav class="bg-white shadow-lg px-6 py-4">
             <div class="container mx-auto flex items-center justify-between">
-                <a href="<?php __DIR__; ?>index.php" class="text-2xl font-bold text-gray-800">Bouge ton Paname</a>
+                <a href="index.php" class="text-2xl font-bold text-gray-800">Bouge ton Paname</a>
 
                 <ul class="hidden md:flex space-x-6 text-gray-700 font-medium">
-                    <li><a href="<?php __DIR__; ?>index.php" class="hover:text-blue-600 transition">Accueil</a></li>
-                    <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-blue-600 transition">Mentions
-                            Legales</a></li>
-                    <li><a href="<?php __DIR__; ?>contact.php" class="hover:text-blue-600 transition">Contact</a></li>
-                    <li><a href="<?php __DIR__; ?>aide.php" class="hover:text-blue-600 transition">Aide</a></li>
+                    <li><a href="index.php" class="hover:text-blue-600 transition">Accueil</a></li>
+                    <li><a href="mentions-legales.php" class="hover:text-blue-600 transition">Mentions Legales</a></li>
+                    <li><a href="contact.php" class="hover:text-blue-600 transition">Contact</a></li>
+                    <li><a href="aide.php" class="hover:text-blue-600 transition">Aide</a></li>
                 </ul>
                 <div class="hidden md:flex items-center space-x-4">
                     <?php
@@ -60,7 +59,7 @@ if (isset($_SESSION['user']['id'])) {
                                 class="font-semibold text-blue-600"><?php echo htmlspecialchars($_SESSION['user']['pseudo']); ?></span>
                             !
                         </p>
-                        <form action="<?php __DIR__; ?>../controller/logout.php" method="post">
+                        <form action="controller/logout.php" method="post">
                             <button type="submit"
                                 class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-xl hover:bg-red-700 transition">
                                 Déconnexion
@@ -88,11 +87,10 @@ if (isset($_SESSION['user']['id'])) {
             </div>
 
             <div id="mobile-menu" class="hidden md:hidden px-4 pt-4 pb-2 space-y-2">
-                <a href="<?php __DIR__; ?> index.php" class="block text-gray-700 hover:text-blue-600">Accueil</a>
-                <a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-blue-600 transition">Mentions
-                    Legales</a>
-                <a href="<?php __DIR__; ?>contact.php" class="block text-gray-700 hover:text-blue-600">Contact</a>
-                <a href="<?php __DIR__; ?>aide.php" class="hover:text-blue-600 transition">Aide</a>
+                <a href="index.php" class="block text-gray-700 hover:text-blue-600">Accueil</a>
+                <a href="mentions-legales.php" class="hover:text-blue-600 transition">Mentions Legales</a>
+                <a href="contact.php" class="block text-gray-700 hover:text-blue-600">Contact</a>
+                <a href="aide.php" class="hover:text-blue-600 transition">Aide</a>
                 <div class="pt-2">
                     <a href="#"
                         class="block w-full text-center text-white bg-blue-600 px-4 py-2 rounded-xl hover:bg-blue-700">Connexion</a>

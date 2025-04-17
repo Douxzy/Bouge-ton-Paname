@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':message' => $message
             ]);
             echo "Merci pour votre message ! Nous vous répondrons rapidement.";
-            header("Location: ../vue/index.php");
+            header("Location: ../index.php");
         } catch (PDOException $e) {
             echo "Erreur lors de l'enregistrement du message : " . $e->getMessage();
         }
