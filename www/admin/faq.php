@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../vue/header/header.php";
+require_once "../header.php";
 require_once '../controller/db.php';
 
 // Vérification admin

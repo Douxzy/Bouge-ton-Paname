@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . "/header.php";
-require __DIR__ . '/controller/db.php';
+require_once "../header.php";
+require_once '../controller/db.php';
 
 // Vérification admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {

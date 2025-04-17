@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . "/header.php";
+require_once "../header.php";
 
-require __DIR__ . '/controller/db.php';
+require_once '../controller/db.php';
 
 // Regrouper les inscriptions par jour
 $stmt = $pdo->query("
@@ -17,12 +17,6 @@ $data = [];
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $labels[] = $row['jour'];
     $data[] = $row['total'];
-}
-
-// Redirection si l'utilisateur n'est pas admin
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
-    exit();
 }
 ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

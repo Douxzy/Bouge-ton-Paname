@@ -1,6 +1,6 @@
 <?php
-require __dir__ . "header.php";
-require __dir__ . '/controller/db.php'; // Connexion PDO
+require_once "../header.php";
+require_once '../controller/db.php';
 
 $error = '';
 
@@ -68,6 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <?php
-require __DIR__ . "/footer.php";
+require_once "../footer.php";
 
 ?>

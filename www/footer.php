@@ -13,10 +13,10 @@
             <ul class="space-y-2 text-sm">
                 <li><a href="<?php __DIR__; ?>index.php" class="hover:text-white transition">Accueil</a></li>
                 <li><a href="<?php __DIR__; ?>mentions-legales.php" class="hover:text-white transition">Mentions Legales</a></li>
-                <li><a href="<?php __DIR__; ?> contact.php" class="hover:text-white transition">Contact</a></li>
+                <li><a href="<?php __DIR__; ?>contact.php" class="hover:text-white transition">Contact</a></li>
                 <li><a href="<?php __DIR__; ?>aide.php" class="hover:text-white transition">Aide</a></li>
                 <br/>
-                <li><a href="login-admin.php" class="hover:text-white transition">Admin</a></li>
+                <li><a href="login.php" class="hover:text-white transition">Admin</a></li>
             </ul>
         </div>
 
