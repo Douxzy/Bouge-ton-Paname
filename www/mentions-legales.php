@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/header.php";
+require_once "header.php";
 ?>
 <div class="max-w-4xl mx-auto px-6 py-12">
         <h1 class="text-4xl font-bold mb-8 text-center text-blue-600">Mentions légales</h1>
@@ -49,6 +49,6 @@ require __DIR__ . "/header.php";
         </section>
     </div>
 <?php
-require __DIR__ . "/footer.php";
+require_once "footer.php";
 ?>
 

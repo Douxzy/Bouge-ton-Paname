@@ -1,6 +1,5 @@
 <?php
-require __dir__ . "/header.php";
-
+require_once "header.php";
 
 $error = $_SESSION['error'] ?? null;
 $success = $_SESSION['success'] ?? null;
@@ -53,6 +52,6 @@ unset($_SESSION['error'], $_SESSION['success']);
     </div>
 </div>
 <?php
-require __dir__ . "/footer.php";
+require_once "footer.php";
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 if (!isset($pdo)) {
-    require_once __DIR__ . "/controller/db.php";
+    require_once "controller/db.php";
 }
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -99,23 +99,17 @@ if (isset($_SESSION['user']['id'])) {
                 </div>
             </div>
         </nav>
-
-        <script>
-            const btn = document.getElementById('mobile-menu-button');
-            const menu = document.getElementById('mobile-menu');
-
-            btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
-            });
-        </script>
         <!-- Bouton pour ouvrir le panneau -->
-        <button onclick="toggleNotifications()" class="fixed top-4 right-4 text-2xl text-blue-500 hover:text-blue-600 transition"><i class="fas fa-bell"></i></button>
+        <button onclick="toggleNotifications()"
+            class="fixed top-4 right-4 text-2xl text-blue-500 hover:text-blue-600 transition"><i
+                class="fas fa-bell"></i></button>
         <!-- Panneau latéral -->
         <div id="notificationPanel"
             class="fixed top-0 right-0 h-full w-full max-w-sm bg-white shadow-lg transform translate-x-full transition-transform z-50">
             <div class="flex items-center justify-between p-4 border-b">
                 <h2 class="text-lg font-semibold">Notifications</h2>
-                <button onclick="toggleNotifications()" class="text-2xl text-gray-500 hover:text-red-500 transition"><i class="fas fa-times"></i></button>
+                <button onclick="toggleNotifications()" class="text-2xl text-gray-500 hover:text-red-500 transition"><i
+                        class="fas fa-times"></i></button>
             </div>
 
             <?php if (!empty($notifications)): ?>
@@ -130,25 +124,6 @@ if (isset($_SESSION['user']['id'])) {
             <?php else: ?>
                 <p class="text-center text-gray-500">Vous n'avez pas de notification pour l'instant</p>
             <?php endif; ?>
-
-
-
         </div>
-
-        <script>
-            function toggleNotifications() {
-                const panel = document.getElementById('notificationPanel');
-                panel.classList.toggle('translate-x-full');
-            }
-
-            function askNotificationPermission() {
-                Notification.requestPermission().then(permission => {
-                    if (permission === "granted") {
-                        alert("Notifications activées !");
-                    } else {
-                        alert("Notifications refusées.");
-                    }
-                });
-            }
-        </script>
+    <script href="js/header.js"></script>
     </header>

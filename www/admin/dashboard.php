@@ -1,6 +1,5 @@
 <?php
 require_once "../header.php";
-
 require_once '../controller/db.php';
 
 // Regrouper les inscriptions par jour

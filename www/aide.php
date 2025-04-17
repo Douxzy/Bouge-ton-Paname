@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . "/header.php";
-require __DIR__ . "/controller/db.php";
-require __DIR__ . "/controller/functions.php";
+require_once "header.php";
+require_once "controller/db.php";
+require_once "controller/functions.php";
 
 // Récupération des questions/réponses depuis la BDD
 $stmt = $pdo->query("SELECT * FROM faq ORDER BY id ASC");
@@ -26,16 +26,8 @@ $faqs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<script>
-    function toggleFaq(button) {
-        const answer = button.nextElementSibling;
-        const icon = button.querySelector('i');
-
-        answer.classList.toggle('hidden');
-        icon.classList.toggle('rotate-180');
-    }
-</script>
+<script href="js/aide.js"></script>
 
 <?php
-require __DIR__ . "/footer.php";
+require_once "footer.php";
 ?>

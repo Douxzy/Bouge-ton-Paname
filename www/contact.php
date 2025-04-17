@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/header.php";
+require_once "header.php";
 ?>
 <div class="w-full h-screen flex items-center justify-center px-4">
     <div class="bg-white w-full max-w-md p-10 rounded-2xl shadow-2xl">
@@ -40,5 +40,5 @@ require __DIR__ . "/header.php";
     </div>
 </div>
 <?php
-require __DIR__ . "/footer.php";
+require_once "footer.php";
 ?>
