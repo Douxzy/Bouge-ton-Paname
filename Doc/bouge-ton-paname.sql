@@ -60,3 +60,14 @@ CREATE TABLE faq (
     question TEXT NOT NULL,
     reponse TEXT NOT NULL
 );
+--------------------------------------------------
+-- Table de Notifications 
+--------------------------------------------------
+CREATE TABLE notifications (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    message TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    vu BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
