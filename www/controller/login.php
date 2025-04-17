@@ -31,7 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'pseudo' => $user['pseudo'],
                 'email' => $user['email']
             ];
-            $_SESSION['success'] = "Connexion réussie. Bienvenue " . $user['pseudo'] . " !";
+            $notif = $pdo->prepare("INSERT INTO notifications (user_id, message) VALUES (?, ?)");
+            $message = "Connexion réussie ! Bienvenue " . $user['pseudo'] . " sur Bouge ton Paname 👋";
+            $notif->execute([$user['id'], $message]);
             header("Location: ../vue/index.php");
             exit;
         } else {
