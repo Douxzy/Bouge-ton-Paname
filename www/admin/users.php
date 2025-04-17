@@ -1,6 +1,6 @@
 <?php
-require_once "../header.php";
-require_once '../controller/db.php';
+require_once "header.php";
+require_once 'controller/db.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
@@ -94,6 +94,6 @@ $users = $pdo->query("SELECT id, email, role, created_at FROM users ORDER BY cre
 </div>
 
 <?php
-require __DIR__ . "/../vue/footer/footer.php";
+require_once "footer.php";
 
 ?>

@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . "/header.php";
-require __DIR__ . '/controller/db.php';
+require "header.php";
+require 'controller/db.php';
 
 // Vérification admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -32,7 +32,7 @@ $commentaires = $stmt->fetchAll();
 <h1 class="text-3xl font-bold mb-6 text-gray-800 tracking-tight">Modération des commentaires</h1>
 
 <div class="flex min-h-screen">
-    <?php require __DIR__ . "/navbar.php"; ?>
+    <?php require "navbar.php"; ?>
 <div class="overflow-x-auto">
     <table class="min-w-full bg-white rounded-2xl shadow ring-1 ring-gray-200 overflow-hidden text-sm">
         <thead class="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
@@ -70,6 +70,6 @@ $commentaires = $stmt->fetchAll();
 </div>
 
 <?php
-require __DIR__ . "/footer.php";
+require "footer.php";
 
 ?>

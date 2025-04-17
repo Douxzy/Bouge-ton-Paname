@@ -1,6 +1,6 @@
 <?php
-require_once "../header.php";
-require_once '../controller/db.php';
+require_once "header.php";
+require_once 'controller/db.php';
 
 // Vérification admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -45,7 +45,7 @@ $publications = $pdo->query("SELECT * FROM evenements ORDER BY date_debut DESC")
 <h1 class="text-3xl font-bold mb-6 text-gray-800 tracking-tight">Événements personnalisés</h1>
 
 <div class="flex min-h-screen">
-    <?php require __DIR__ . "/navbar.php"; ?>
+    <?php require_once "navbar.php"; ?>
     <!-- Formulaire d'ajout -->
     <div class="bg-white p-6 rounded-2xl shadow ring-1 ring-gray-200 mb-8">
         <h2 class="text-xl font-semibold mb-4 text-gray-800">Ajouter un événement</h2>
@@ -108,6 +108,6 @@ $publications = $pdo->query("SELECT * FROM evenements ORDER BY date_debut DESC")
 </div>
 
 <?php
-require __DIR__ . "/footer.php";
+require_once "footer.php";
 
 ?>

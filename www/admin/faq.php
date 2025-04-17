@@ -1,6 +1,6 @@
 <?php
-require_once "../header.php";
-require_once '../controller/db.php';
+require_once "header.php";
+require_once 'controller/db.php';
 
 // Vérification admin
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -96,4 +96,4 @@ $faqs = $pdo->query("SELECT * FROM faq ORDER BY id ASC")->fetchAll();
     </div>
 </div>
 
-<?php require __DIR__ . "/../vue/footer/footer.php"; ?>
+<?php require_once "footer.php"; ?>

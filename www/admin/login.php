@@ -1,6 +1,6 @@
 <?php
-require_once "../header.php";
-require_once '../controller/db.php';
+require_once "header.php";
+require_once 'controller/db.php';
 
 $error = '';
 
@@ -68,6 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <?php
-require_once "../footer.php";
+require_once "footer.php";
 
 ?>
