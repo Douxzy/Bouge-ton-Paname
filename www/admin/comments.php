@@ -39,7 +39,6 @@ $commentaires = $stmt->fetchAll();
             <tr>
                 <th class="p-4">ID</th>
                 <th class="p-4">Utilisateur</th>
-                <th class="p-4">Événement API</th>
                 <th class="p-4">Commentaire</th>
                 <th class="p-4">Action</th>
             </tr>
