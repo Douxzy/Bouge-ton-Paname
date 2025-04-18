@@ -16,7 +16,7 @@
                 <li><a href="<?php __DIR__; ?>contact.php" class="hover:text-white transition">Contact</a></li>
                 <li><a href="<?php __DIR__; ?>aide.php" class="hover:text-white transition">Aide</a></li>
                 <br />
-                <li><a href="" class="hover:text-white transition">Admin</a></li>
+                <li><a href="https://douxzy.alwaysdata.net/bouge-ton-paname/admin/login.php" class="hover:text-white transition">Admin</a></li>
             </ul>
         </div>
 

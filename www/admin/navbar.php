@@ -2,9 +2,9 @@
     <!-- NAVBAR LATÉRALE -->
 
     <nav class="w-64 bg-white shadow-lg p-6 space-y-6">
-        <a href="https://douxzy.alwaysdata.net/bouge-ton-paname/index.php" class="inline-flex items-center gap-2 text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
+        <a href="dashboard.php" class="inline-flex items-center gap-2 text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
             <i class="fas fa-arrow-left"></i>
-            Retour au site  
+            Retour au dashboard  
         </a>
         <h2 class="text-2xl font-bold text-gray-800 mb-4">Espace admin</h2>
 

@@ -48,12 +48,6 @@ if (isset($_GET['delete'])) {
 // Récupérer les événements
 $publications = $pdo->query("SELECT * FROM evenements ORDER BY date_debut DESC")->fetchAll();
 ?>
-
-<a href="dashboard.php"
-   class="inline-flex items-center gap-2 text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
-    <i class="fas fa-arrow-left"></i> Retour au dashboard
-</a>
-
 <h1 class="text-3xl font-bold mb-6 text-gray-800 tracking-tight">Événements personnalisés</h1>
 
 <div class="flex min-h-screen">

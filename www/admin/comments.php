@@ -28,10 +28,7 @@ $stmt = $pdo->query("SELECT commentaires.commentaire, commentaires.id,  commenta
 $commentaires = $stmt->fetchAll();
 ?>
 
-<a href="dashboard.php" class="inline-flex items-center gap-2 text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">
-    <i class="fas fa-arrow-left"></i>
-    Retour au dashboard
-</a>
+
 <h1 class="text-3xl font-bold mb-6 text-gray-800 tracking-tight">Modération des commentaires</h1>
 
 <div class="flex min-h-screen">
