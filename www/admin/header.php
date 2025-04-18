@@ -1,11 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!isset($pdo)) {
     require_once "controller/db.php";
 }
 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
 $notifications = [];
 if (isset($_SESSION['user']['id'])) {
