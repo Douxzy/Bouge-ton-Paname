@@ -41,13 +41,19 @@ require_once "header.php";
             </p>
         </section>
 
-        <section>
+        <section class="mb-10">
             <h2 class="text-2xl font-semibold text-gray-700 mb-2">Cookies</h2>
             <p>
                 Ce site utilise des cookies pour améliorer votre expérience. Vous pouvez les désactiver dans les paramètres de votre navigateur.
             </p>
         </section>
-    </div>
+
+        <section>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-2">API utilisées</h2>
+
+            <a href="https://opendata.paris.fr/explore/dataset/que-faire-a-paris-/" class="text-blue-500 underline">Opendata Paris - que faire a paris</a>
+        </section>
+    </div>  
 <?php
 require_once "footer.php";
 ?>
