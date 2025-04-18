@@ -125,5 +125,26 @@ if (isset($_SESSION['user']['id'])) {
                 <p class="text-center text-gray-500">Vous n'avez pas de notification pour l'instant</p>
             <?php endif; ?>
         </div>
-    <script href="js/header.js"></script>
+        <script>
+            function toggleNotifications() {
+                const panel = document.getElementById('notificationPanel');
+                panel.classList.toggle('translate-x-full');
+            }
+
+            function askNotificationPermission() {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        alert("Notifications activées !");
+                    } else {
+                        alert("Notifications refusées.");
+                    }
+                });
+            }
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+        </script>
     </header>

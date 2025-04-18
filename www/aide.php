@@ -26,7 +26,15 @@ $faqs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </div>
 
-<script href="js/aide.js"></script>
+<script>
+    function toggleFaq(button) {
+        const answer = button.nextElementSibling;
+        const icon = button.querySelector('i');
+
+        answer.classList.toggle('hidden');
+        icon.classList.toggle('rotate-180');
+    }
+</script>
 
 <?php
 require_once "footer.php";
