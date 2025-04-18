@@ -9,7 +9,7 @@ require_once "header.php";
             <p>
                 <strong>Bouge ton Paname</strong><br>
                 Site Créé par Romain Deschaseaux<br>
-                Email : contact@bougetonpaname.fr<br>
+                Email : douxzy@alwaysdata.net<br>
             </p>
         </section>
 
@@ -22,8 +22,8 @@ require_once "header.php";
             <h2 class="text-2xl font-semibold text-gray-700 mb-2">Hébergement</h2>
             <p>
                 Hébergeur : Always Data<br>
-                Adresse : 222-224 Boulevard Gustave Flaubert, 63000 Clermont-Ferrand<br>
-                Téléphone : 04 44 44 60 40
+                Adresse : 91 Rue du Faubourg Saint-Honoré, 75008 Paris<br>
+                Téléphone : 01 84 16 23 40
             </p>
         </section>
 
@@ -37,7 +37,7 @@ require_once "header.php";
         <section class="mb-10">
             <h2 class="text-2xl font-semibold text-gray-700 mb-2">Données personnelles</h2>
             <p>
-                Les données collectées sont utilisées uniquement pour le fonctionnement du site. Conformément au RGPD, vous pouvez demander la suppression ou modification de vos données à tout moment via <a href="mailto:contact@bougetonpaname.fr" class="text-blue-500 underline">contact@bougetonpaname.fr</a>.
+                Les données collectées sont utilisées uniquement pour le fonctionnement du site. Conformément au RGPD, vous pouvez demander la suppression ou modification de vos données à tout moment via <a href="mailto:douxzy@alwaysdata.net" class="text-blue-500 underline">douxzy@alwaysdata.net</a>.
             </p>
         </section>
 

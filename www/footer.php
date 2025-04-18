@@ -23,8 +23,8 @@
         <div>
             <h3 class="text-lg font-semibold text-white mb-4">Contact</h3>
             <ul class="text-sm space-y-2">
-                <li>Email : <a href="mailto:contact@bougetonpaname.fr"
-                        class="hover:text-white">contact@bougetonpaname.fr</a></li>
+                <li>Email : <a href="mailto:douxzy@alwaysdata.net"
+                        class="hover:text-white">douxzy@alwaysdata.net</a></li>
                 <li>Tél : <a href="tel:+33123456789" class="hover:text-white">01 23 45 67 89</a></li>
                 <li>Adresse : Paris, France</li>
             </ul>
